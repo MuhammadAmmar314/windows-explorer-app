@@ -1,0 +1,10 @@
+{
+    "schema": "./src/models/**/*.ts",
+    "out": "./migrations",
+    "dialect": "mysql",
+    "host": "localhost",
+    "port": 3306,
+    "user": "root",
+    "database": "windows_explorer"
+  }
+  
