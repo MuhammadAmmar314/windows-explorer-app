@@ -6,7 +6,7 @@
           <span class="folder-name" @click="selectFolder(folder.id)">
             📁 {{ folder.name }}
           </span>
-          <span class="expand-icon" @click.stop="toggleFolder(folder)">
+          <span class="expand-icon" @click="toggleFolder(folder)">
             {{ folder.children?.length ? (expandedFolders.has(folder.id) ? "  ▼" : "  ▶") : " " }}
           </span>
         </div>
@@ -25,7 +25,7 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { AddFolder } from "../api/folders"; // Import service function
+import { AddFolder } from "../api/folders";
 
 interface Folder {
   id: number;
@@ -61,6 +61,7 @@ const addSubFolder = async (folder: Folder) => {
       folder.children = [];
     }
     folder.children.push(newFolder); // Add the new folder to the current folder's children
+    window.location.reload();
   } catch (error) {
     console.error("Failed to add folder:", error);
     alert("Failed to add folder. Please try again.");
@@ -127,6 +128,15 @@ const addSubFolder = async (folder: Folder) => {
 
 .add-folder-btn:hover {
   text-decoration: underline;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
 }
   </style>
   

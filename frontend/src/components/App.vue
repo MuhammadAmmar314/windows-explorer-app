@@ -1,7 +1,8 @@
 <template>
   <div class="explorer">
     <div class="left-panel">
-      <FolderTree :folders="folderTree" :selected-folder-id="selectedFolderId" @folder-selected="onFolderSelected" />
+      <!-- <FolderTree :folders="folderTree" :selected-folder-id="selectedFolderId" @folder-selected="onFolderSelected" /> -->
+        <MainFolderTree :folders="folderTree" :selected-folder-id="selectedFolderId" @folder-selected="onFolderSelected" />
     </div>
     <div class="right-panel">
       <FolderDetails :selected-folder-id="selectedFolderId ?? undefined" @folder-selected="onFolderSelected" />
@@ -13,7 +14,7 @@
 import { onMounted, ref } from "vue";
 import { fetchAllFolders } from "../api/folders";
 import FolderDetails from "../components/FolderDetails.vue";
-import FolderTree from "../components/FolderTree.vue";
+import MainFolderTree from "./MainFolderTree.vue";
 
 interface Folder {
   id: number;
