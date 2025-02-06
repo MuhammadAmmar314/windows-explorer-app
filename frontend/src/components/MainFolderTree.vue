@@ -6,6 +6,9 @@
         placeholder="Search Folders..."
         class="search-input"
       />
+      <div style="display: flex; justify-content: end;">
+        <button @click="addRootFolder" class="add-folder-btn">+ Add Root Folder</button>
+      </div>
       <FolderTree
         :folders="filteredFolders"
         :expanded-folders="expandedFolders"
@@ -16,6 +19,7 @@
   
   <script lang="ts" setup>
   import { computed, ref } from "vue";
+import { AddFolder } from "../api/folders";
 import FolderTree from "./FolderTree.vue";
   
   interface Folder {
@@ -55,6 +59,19 @@ import FolderTree from "./FolderTree.vue";
   const performSearch = () => {
     if (!searchQuery.value) {
       expandedFolders.value.clear();
+    }
+  };
+
+  const addRootFolder = async () => {
+    const folderName = prompt("Enter the name of the new folder:");
+    if (!folderName) return;
+
+    try {
+      const newFolder = await AddFolder({ name: folderName, parentId: null });
+      props.folders.push(newFolder);
+    } catch (error) {
+      console.error("Failed to add root folder:", error);
+      alert("Failed to add folder. Please try again.");
     }
   };
   </script>
